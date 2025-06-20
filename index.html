@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonio Yucor | IT Student</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #5F7C8A; /* Muted Blue-Gray */
+      color: #D3DCE0; /* Light Gray */
+      line-height: 1.6;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+
+
+    header.hero {
+      background: url(https://th.bing.com/th/id/OIP.q1aTGdnvPfTP8iF8p-wj-gHaEo?rs=1&pid=ImgDetMain);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #E6E8EB; /* Off-white for contrast */
+      padding: 2em;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      scroll-snap-align: start;
+      gap: 3em;
+    }
+
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+
+    .hero-content h1 {
+      font-size: 80px;
+      margin-bottom: 0.2em;
+      line-height: 1.1;
+    }
+
+
+    /* Adjusted font size for the highlighted name */
+    .hero-content h1 .highlight {
+      font-size: 0.8em; /* Make it 80% of the h1's font size */
+      display: block; /* Ensures it takes its own line if it gets too long, or adjust as needed */
+     
+      /* Typewriter Effect CSS */
+      overflow: hidden; /* Ensures the text is hidden until typed */
+      /* Removed: border-right: .15em solid #FFD700; */ /* The blinking cursor */
+      white-space: nowrap; /* Keeps the text on a single line */
+      animation:
+        typing 1.5s steps(14, end) forwards; /* Removed blink-caret animation, made faster */
+      width: 0; /* Start with no width */
+    }
+
+
+    /* Keyframes for the typing animation */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+
+    /* Removed: Keyframes for the blinking cursor */
+    /* @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #FFD700 }
+    } */
+
+
+
+
+    .hero-content p {
+      font-size: 3em;
+      margin-top: 1em; /* Increased top margin to create more space */
+      line-height: 1.2;
+    }
+
+
+    .profile-pic {
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #2C3E50; /* Darker Blue-Gray for border */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+      transition: transform 0.3s ease; /* Added transition for smooth zoom */
+    }
+
+
+    .profile-pic:hover {
+      transform: scale(1.1); /* Added zoom on hover */
+    }
+
+
+    .highlight {
+      color: #FFD700; /* Dark Yellow */
+    }
+
+
+    nav {
+      position: fixed;
+      top: 2em;
+      right: 2em;
+      z-index: 1000;
+    }
+
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5em;
+    }
+
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5em 1em;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      background-color: #3498DB; /* Classic Blue */
+    }
+
+
+    nav a:hover {
+      background-color: #2980B9; /* Darker Blue on hover */
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+
+    .section {
+      padding: 3em 2em;
+      max-width: 900px;
+      margin: auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+    }
+
+
+    .about-section {
+      min-height: 70vh;
+      justify-content: flex-start;
+      padding-top: 5em;
+    }
+
+
+    .about-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      text-align: center;
+      color: #E6E8EB; /* Match header color for consistency */
+    }
+
+
+    .about-section > p {
+      font-size: 25px;
+      line-height: 1.6;
+      margin-bottom: 2em;
+      text-align: justify;
+      color: #E6E8EB; /* Ensure body text is readable */
+    }
+
+
+    .about-boxes-container {
+      display: flex;
+      justify-content: space-around;
+      gap: 1.5em;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 1em;
+    }
+
+
+    .about-box {
+      flex: 1;
+      min-width: 250px;
+      background: #DAE8F0; /* Lighter Blue-Gray */
+      padding: 1.5em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: 1px solid #c0d0d8; /* Slightly darker border */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+
+    .about-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+
+    .about-box h3 {
+      color: #2C3E50; /* Dark Blue-Gray */
+      margin-bottom: 0.5em;
+      font-size: 1.4em;
+    }
+
+
+    .about-box p {
+      font-size: 0.95em;
+      line-height: 1.5;
+      color: #555; /* Dark gray for readability */
+      text-align: justify;
+    }
+
+
+    .education-list {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.2em 0.5em;
+      text-align: left;
+      margin: 0 auto;
+      max-width: fit-content;
+      color: #555; /* Consistent text color */
+    }
+
+
+    .education-list strong {
+      font-weight: bold;
+      color: #2C3E50; /* Dark Blue-Gray for emphasis */
+    }
+
+
+    .skills-list {
+      list-style-position: inside;
+      text-align: left;
+      padding-left: 0;
+      margin: 0 auto;
+      margin-top: 1em;
+      max-width: fit-content;
+      line-height: 1.6;
+      display: table;
+      color: #555; /* Consistent text color */
+    }
+
+
+    .skills-list li {
+      margin-bottom: 0.5em;
+      padding: 0;
+    }
+
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5em;
+      margin-top: 1em;
+    }
+
+
+    .projects-grid div {
+      padding: 2.5em;
+      background: #ADD8E6; /* Light Sky Blue */
+      border-radius: 15px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+      color: #2C3E50; /* Dark Blue-Gray for text within project boxes */
+    }
+
+
+    .projects-grid div:hover {
+      transform: scale(1.02);
+    }
+
+
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1em;
+    }
+
+
+    /* Updated Contact Form Styles */
+    form {
+      display: flex;
+      flex-wrap: wrap; /* Allows items to wrap to the next line */
+      justify-content: center; /* Centers items when wrapped */
+      gap: 1em; /* Spacing between form elements */
+      max-width: 600px; /* Increased max-width to allow more space for inline elements */
+      margin: auto;
+    }
+
+
+    form input[type="text"],
+    form input[type="email"] {
+      flex: 1; /* Allows them to grow and shrink */
+      min-width: 200px; /* Ensures they don't get too small */
+    }
+
+
+    form textarea {
+      width: 100%; /* Textarea takes full width */
+      min-height: 100px; /* Give it a reasonable starting height */
+      resize: vertical; /* Allow vertical resizing only */
+    }
+
+
+    form button {
+      width: 100%; /* Button takes full width */
+      max-width: 400px; /* Limit button width for better appearance */
+    }
+
+
+
+
+    /* Contact Me section specific styles */
+    #projects h2,
+    #contact h2 {
+      font-size: 2.5em; /* Matches the font-size of About Me heading */
+      text-align: center; /* Centers the heading */
+      margin-bottom: 0.5em; /* Adjust as needed for spacing, matching About Me */
+      color: #E6E8EB; /* Consistent heading color */
+    }
+
+
+    input, textarea {
+      padding: 1.2em; /* Increased padding */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1.1em; /* Increased font size for input text */
+      background-color: #E6E8EB; /* Light background for inputs */
+      color: #333; /* Dark text for inputs */
+    }
+
+
+    button {
+      background: #3498DB; /* Classic Blue */
+      color: white;
+      font-weight: bold;
+      padding: 1.2em; /* Increased padding */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1.2em; /* Increased font size for button text */
+    }
+
+
+    button:hover {
+      background: #2980B9; /* Darker Blue on hover */
+    }
+
+
+    footer {
+      text-align: center;
+      padding: 1.5em;
+      background: #2C3E50; /* Dark Blue-Gray for footer */
+      color: #E6E8EB; /* Light text for footer */
+      font-size: 0.9em;
+      min-height: 10vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: end;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="home">
+    <img src="https://scontent.fdgt1-1.fna.fbcdn.net/v/t39.30808-6/506619289_1022852569998431_657128867618568878_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeElrftOLBbjjlJHFxDnTp1X1qC2-VIzqMfWoLb5UjOox9uWOXTCv3fHvEMOlaliXXe9fidoIrYSBt66UQ5XhYwK&_nc_ohc=AL5VxURWviIQ7kNvwEKw31c&_nc_oc=AdklVvxm7W1wB8w4YHpOdtHSpWGWN_B8oplgQzoqbxneUPAgvOuimMiSoMtH6fcMHtI&_nc_zt=23&_nc_ht=scontent.fdgt1-1.fna&_nc_gid=AFJ58dZ5zYOwLczLqJxcRw&oh=00_AfO5G39QdnwYqy8S9dRFIGNnRhEbesRjh-qI4hiWBaRqQA&oe=685849EA" class="profile-pic" alt="Antonio Yucor Profile Picture" />
+    <div class="hero-content">
+      <h1>Hello! I am <span class="highlight">Antonio Yucor</span></h1>
+      <p>Welcome to my Portfolio!</p>
+    </div>
+  </header>
+
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <main>
+    <section id="about" class="section about-section">
+      <h2>About Me</h2>
+      <p>
+        As an IT student I'm deeply immersed in the world of technology, with a particular passion for front-end web development. My journey is all about transforming innovative ideas into functional and engaging digital experiences. I thrive on the creative process of building intuitive user interfaces and bringing designs to life using HTML, CSS, and JavaScript.
+      </p>
+      <div class="about-boxes-container">
+        <div class="about-box">
+          <h3>Educational Background</h3>
+          <div class="education-list">
+            <strong>College:</strong> <span>Asian College - Dumaguete Campus</span>
+            <strong>Senior High:</strong> <span>Valencia National High School</span>
+            <strong>Elementary:</strong> <span>Timbao Elementary School</span>
+          </div>
+        </div>
+        <div class="about-box">
+          <h3>Soft Skills</h3>
+          <ul class="skills-list">
+            <li>Problem-Solving</li>
+            <li>Adaptability</li>
+            <li>Teamwork</li>
+            <li>Communication</li>
+            <li>Attention to Detail</li>
+            <li>Time Management</li>
+          </ul>
+        </div>
+        <div class="about-box">
+          <h3>Experience</h3>
+          <p>My recent OJT at WorkPad (WrkPod) provided invaluable hands-on experience in virtual assistance, where I mastered essential digital tools and honed efficient task management, further broadening my understanding of diverse tech applications. This experience reinforced my commitment to leveraging technology to solve real-world challenges and deliver impactful solutions..</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div id="project-list" class="projects-grid"></div>
+    </section>
+
+
+    <section id="contact" class="section">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+
+  <footer>
+    <p>© 2025 Antonio Yucor. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    const projects = [
+      {
+        title: "Figma Project",
+        image: "https://lh3.googleusercontent.com/drive-storage/AJQWtBPDKBNuk9zyexHhEDTaHbL7baRS1EnM91y1TeEiQWbv4jkm4Fh1c9Y-c0H5WQG2A71vh5Cxj-OKUf9_J8WlUvYv-dEVFx-SxrIM2waBcjxH9wE=w1342-h649",
+        href: "https://lh3.googleusercontent.com/drive-storage/AJQWtBMF4mY_tdpOpWNtQMXP156c0Ha_T29v8kf4uPEK17BVJ__hyDIol2XTAuLKcV-Sw-Suihj7nOQXiGp3azdnDTGlJtiKzZcsyqTnpkb4LWuyRqw=w1342-h649"
+      },
+      {
+        title: "Brochure Project",
+        image: "https://lh3.googleusercontent.com/drive-storage/AJQWtBPAm7rMtkN5tcwT3ZVE9ouuACZEIm9yoefz-iC-YgOHthPp39ayCMiE2RktyTOnO7LVK69Bp3_AMYvFsR7Zhu-UGfuQQemi_1YL2IeGnBnsXQI=w1342-h649",
+        href: "https://lh3.googleusercontent.com/drive-storage/AJQWtBNwHDWqUAXHUdNBb0Gr_7zNNSIdL-9XNaL_IuWpECFqRMZmm9bfIDEFGZCaQjKpC-tTglIy-citFWqiAeEFxlN7m9D8KbaZZRu3s7xRFnWObQ=w1342-h649"
+      }
+    ];
+
+
+    const projectList = document.getElementById("project-list");
+
+
+    // Clear any existing static project content from the HTML
+    projectList.innerHTML = '';
+
+
+    projects.forEach(project => {
+      const div = document.createElement("div");
+
+
+      // If there's an href, create an anchor tag around the image and title
+      if (project.href) {
+        div.innerHTML = `
+          <a href="${project.href}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+            <img src="${project.image}" alt="${project.title}" class="project-img" />
+            <h3>${project.title}</h3>
+          </a>
+        `;
+      } else {
+        div.innerHTML = `
+          <img src="${project.image}" alt="${project.title}" class="project-img" />
+          <h3>${project.title}</h3>
+        `;
+      }
+      projectList.appendChild(div);
+    });
+
+
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Thanks for reaching out! Antonio will get back to you soon.");
+    });
+  </script>
+</body>
+</html>
+
